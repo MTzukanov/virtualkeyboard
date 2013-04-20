@@ -61,14 +61,12 @@ public class DemoUI extends UI
     	
     	// Show it in the middle of the screen
     	final VerticalLayout layout = new VerticalLayout();
-    	final VerticalLayout virtualKeyboardLayout = new VerticalLayout();
         layout.setStyleName("demoContentLayout");
 
-        virtualkeyboard.setFloatingWindow(true);
-        //virtualKeyboardLayout.addComponent(virtualkeyboard);
+        virtualkeyboard.setFloatingWindow(false);
+        layout.addComponent(virtualkeyboard);
+        //layout.setExpandRatio(virtualkeyboard, 0);
         
-        
-        layout.addComponent(virtualKeyboardLayout);
         layout.addComponent(textField0);
         layout.addComponent(textField1);
         layout.addComponent(textField2);
