@@ -6,6 +6,7 @@ var container;
 var current_layout = 'sv';
 var current_sub_layout = 'default';
 var caps_lock = false;
+var show_lang_dropbox = true;
 
 window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
     container = this.getElement();
@@ -15,7 +16,8 @@ window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
 		this.getElement().innerHTML = '<div id="keyboard_container"></div>';
 		container = document.getElementById('keyboard_container');
 		current_layout = this.getState().current_layout;
-		generate_keyboard(container, current_layout, current_sub_layout);
+		//show_lang_dropbox = current_layout = this.getState().show_lang_dropbox;
+		generate_keyboard(container, current_layout, current_sub_layout, show_lang_dropbox);
 	}
 }
 
@@ -56,7 +58,7 @@ function key_pressed(value)
 			else
 				generate_keyboard(container, current_layout, 'shift');
 		}
-		else if ('{alt}' == value) {
+		else if ('{alt}' == value && 'alt' in keyboards[current_layout]) {
 			if ('alt' == current_sub_layout)
 				generate_keyboard(container, current_layout, 'default');
 			else
@@ -70,7 +72,7 @@ function select_layout_change()
     var selectBox = document.getElementById('virtual_keyboard_selector');
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
     generate_keyboard(container, selectedValue, 'default');
-    this.getState().current_layout = selectedValue;
+    //rpcProxy.onLayoutChange(selectedValue);
 }
 
 var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
@@ -85,9 +87,13 @@ var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
 		keys = keyboards[layout][sub_layout][row].split(" ");
 		for (var i = 0; i < keys.length; i++)
 		{
-			add_button(container, key_value_to_title(keys[i]), keys[i]);
+			if (keys[i] == '{alt}' && !('alt' in keyboards[current_layout]))
+				continue;
+			else if (!(keys[i] in {'{cancel}':1, '{accept}':1}))
+				add_button(container, key_value_to_title(keys[i]), keys[i]);
 		}
-		container.innerHTML += ("<br>");
+		if (row != keyboards[layout][sub_layout].length-1)
+			container.innerHTML += ("<br>");
 	}
 	
 	if (dropbox)
