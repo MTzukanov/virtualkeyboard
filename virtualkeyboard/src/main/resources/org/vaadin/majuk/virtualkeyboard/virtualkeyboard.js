@@ -13,6 +13,7 @@ window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
    
 	this.onStateChange = function() {
 		container.innerHTML = '<div id="keyboard_container"></div>';
+		current_layout = this.getState().current_layout;
 		generate_keyboard(container, current_layout, current_sub_layout);
 	}
 }
@@ -21,6 +22,7 @@ function add_button(container, title, value) {
   var newbutton = document.createElement('button');
   newbutton.innerHTML = title;
   newbutton.setAttribute('onclick', 'key_pressed("'+value+'");');
+  newbutton.setAttribute('class', 'virtual_key ' + value.slice(1, -1));
   container.appendChild(newbutton);
 }
 
@@ -83,6 +85,9 @@ var generate_keyboard = function(container, layout, sub_layout)
 function key_value_to_title(value) {
 	if (value.length == 1)
 		return value;
-	else
+
+	if (current_layout in key_value_dict)
 		return key_value_dict[current_layout][value];
+	else
+		return key_value_dict['default'][value]
 }

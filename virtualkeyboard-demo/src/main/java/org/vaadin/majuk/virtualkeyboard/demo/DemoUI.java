@@ -6,6 +6,9 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -22,6 +25,16 @@ public class DemoUI extends UI
     	// Initialize our new UI component
     	final VirtualKeyboard virtualkeyboard = new VirtualKeyboard();
     	final TextField textField = new TextField();
+    	final Button switchbutton = new Button("Switch EN/FI");
+    	
+    	switchbutton.addClickListener(new ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) {
+				if (virtualkeyboard.getState().current_layout == "sv")
+					virtualkeyboard.getState().current_layout = "fi";
+				else
+					virtualkeyboard.getState().current_layout = "sv";
+			}});
     	
     	virtualkeyboard.addKeyListener(new VirtualKeyboard.KeyListener() {
     			@Override	
@@ -37,7 +50,7 @@ public class DemoUI extends UI
         //layout.setSizeFull();
         layout.addComponent(virtualkeyboard);
         layout.addComponent(textField);
-        //layout.setComponentAlignment(virtualkeyboard, Alignment.MIDDLE_CENTER);
+        layout.addComponent(switchbutton);
         setContent(layout);
 
     }

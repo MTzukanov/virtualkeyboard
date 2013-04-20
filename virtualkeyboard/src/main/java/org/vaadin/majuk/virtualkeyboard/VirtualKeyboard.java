@@ -54,11 +54,11 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
             }
         });
 
-        this.getState().container = "keyboard_container"; 
+        this.getState().current_layout = "sv"; 
 	}
 
 	public static class State extends JavaScriptComponentState {
-		public String container;
+		public String current_layout;
 	}
 	
 	public State getState() {
