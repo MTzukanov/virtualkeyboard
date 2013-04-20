@@ -5,36 +5,56 @@
 	text-align: center;
 }
 
-    #keyboard_container button {
-        font-size: 1.2em;
+   #keyboard_container button {
+        font-size: 1.5em;
         margin: 0 5px 5px 0;
  		background: #fff;
  		border: 1px solid #f9f9f9;
-        -moz-border-radius: 5px;  
+        border-radius: 5px;  
+        box-shadow: 2px 2px 2px 1px rgba(50, 50, 50, 0.5);
 	    -webkit-border-radius: 5px;
-	    width: 30px;
+	  
 	    height: 30px;  
 	}
 
-
+		 #virtual_keyboard_selector{
+	 		width: 90px;
+	 		padding: 5px;
+	 		font-size: 1.3em;
+	 		margin: 0 5px 5px 0;
+	 		background: #fff;
+	 		border: 1px solid #f9f9f9;
+	        border-radius: 5px;  
+	        box-shadow: 2px 2px 2px 1px rgba(50, 50, 50, 0.5);
+		    -webkit-border-radius: 5px;
+		  
+		    height: 30px; 
+		 }
+		 
 		#keyboard_container .shift {
-			width: 60px; 
+			padding: 5px 4; 
+			font-size: 1.3em;
 		}
 		#keyboard_container .tab {
-			width: 70px;  
+			padding: 5px 18px; 
+			font-size: 1.3em;
 		}
 		#keyboard_container .bksp {
-			width: 77px;
+			padding: 5px;
+			font-size: 1.3em;
 		}
 		#keyboard_container .space {
-			width: 70%;
-		}
+			padding: 0 150px;
+	}
 		#keyboard_container .alt {
-			width: 35px;
+			font-size: 1.3em;
 		}
 		#keyboard_container .cplk {
-			width: 80px;  
+			padding: 11px 3px;
+			font-size:10px;
+			font-weight: bold;
 		}
 		#keyboard_container .enter {
-			width: 100px;  
+			padding: 5px 5; 
+			font-size: 1.3em;
 		}
