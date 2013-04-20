@@ -1,83 +1,88 @@
+var key_value_to_char = { '{tab}': '\t', '{bksp}': '\b', '{enter}': '\n', '{space}': ' ' };
+
 var rpcProxy;
+var container;
+
+var current_layout = 'sv';
+var current_sub_layout = 'default';
+var caps_lock = false;
 
 window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
-    var element = this.getElement();
+    container = this.getElement();
     rpcProxy = this.getRpcProxy();
-	
+   
 	this.onStateChange = function() {
-		//element.innerHTML = //'<button onclick="generate_keyboard(\'keyboard_container\', keyboard_sv)">Generate Keyboard</button>\
-		//<input type="text" id="target">\
-		//'<div id="keyboard_container">\
-		//</div>';
-		
-		generate_keyboard(element, keyboard_sv);
+		container.innerHTML = '<div id="keyboard_container"></div>';
+		generate_keyboard(container, current_layout, current_sub_layout);
 	}
 }
 
-/* qwerty by Mika Perreri Korhonen (https://github.com/jouk0) - */
-var keyboard_sv = {
-'default' : [
-"\u00a7 1 2 3 4 5 6 7 8 9 0 + \u0301 {bksp}",
-"{tab} q w e r t y u i o p \u00e5 \u0308",
-"a s d f g h j k l \u00f6 \u00e4 ' {enter}",
-"{shift} < z x c v b n m , . - {shift}",
-"{accept} {alt} {space} {alt} {cancel}"
-],
-'shift' : [
-'\u00bd ! " # \u00a4 % & / ( ) = ? \u0300 {bksp}',
-"{tab} Q W E R T Y U I O P \u00c5 \u0302",
-"A S D F G H J K L \u00d6 \u00c4 * {enter}",
-"{shift} > Z X C V B N M ; : _ {shift}",
-"{accept} {alt} {space} {alt} {cancel}"
-],
-'alt' : [
-'\u00a7 1 @ \u00a3 $ 5 6 { [ ] } \\ \u0301 {bksp}',
-'{tab} q w € r t y u i o p \u00e5 \u0303',
-"a s d f g h j k l \u00f6 \u00e4 ' {enter}",
-'{shift} | z x c v b n \u00b5 , . - {shift}',
-'{accept} {alt} {space} {alt} {cancel}'
-]
-};
-
 function add_button(container, title, value) {
-  var newdiv = document.createElement('button');
-
-  newdiv.innerHTML = title;
-  newdiv.setAttribute('onclick', 'key_pressed("'+value+'");');
-  container.appendChild(newdiv);
+  var newbutton = document.createElement('button');
+  newbutton.innerHTML = title;
+  newbutton.setAttribute('onclick', 'key_pressed("'+value+'");');
+  container.appendChild(newbutton);
 }
 
 function key_pressed(value)
 {
-	rpcProxy.onKeyClick(value);
 	if (value.length == 1)
 	{	
-		var target = get_keyboard_target_element_id();
-		target.value += value;
-		target.focus();
+		rpcProxy.onKeyClick(value);
+		if (!caps_lock)
+			generate_keyboard(container, current_layout, 'default');
+		else
+			generate_keyboard(container, current_layout, 'shift');
 	}
 	else
 	{
-		if ('{bksp}' == value) {
-			alert('bksp');
+		if (value in key_value_to_char)
+		{
+			rpcProxy.onKeyClick(key_value_to_char[value]);
+		}
+		else if ('{shift}' == value) {
+			if ('shift' == current_sub_layout || caps_lock)
+				generate_keyboard(container, current_layout, 'default');
+			else
+				generate_keyboard(container, current_layout, 'shift');
+		}
+		else if ('{cplk}' == value) {
+			caps_lock = !caps_lock;
+			if ('shift' == current_sub_layout)
+				generate_keyboard(container, current_layout, 'default');
+			else
+				generate_keyboard(container, current_layout, 'shift');
+		}
+		else if ('{alt}' == value) {
+			if ('alt' == current_sub_layout)
+				generate_keyboard(container, current_layout, 'default');
+			else
+				generate_keyboard(container, current_layout, 'alt');
 		}
 	}
 }
 
-var generate_keyboard = function(container, keyboard)
+var generate_keyboard = function(container, layout, sub_layout)
 {
-	for (row in keyboard['default'])
+	current_layout = layout;
+	current_sub_layout = sub_layout;
+
+	container.innerHTML = '';
+	
+	for (row in keyboards[layout][sub_layout])
 	{
-		keys = keyboard['default'][row].split(" ");
+		keys = keyboards[layout][sub_layout][row].split(" ");
 		for (var i = 0; i < keys.length; i++)
 		{
-			add_button(container, keys[i], keys[i]);
+			add_button(container, key_value_to_title(keys[i]), keys[i]);
 		}
 		container.innerHTML += ("<br>");
 	}
 }
 
-function get_keyboard_target_element_id() {
-	return document.getElementById("target");
+function key_value_to_title(value) {
+	if (value.length == 1)
+		return value;
+	else
+		return key_value_dict[current_layout][value];
 }
-

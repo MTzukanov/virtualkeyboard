@@ -26,6 +26,7 @@ public class DemoUI extends UI
     	virtualkeyboard.addKeyListener(new VirtualKeyboard.KeyListener() {
     			@Override	
     			public void keyPress(VirtualKeyboard.KeyEvent event) {
+    				System.out.println("Key pressed: " + event.getKeyChar());
     				textField.setValue(textField.getValue() + event.getKeyChar());
     			}
     	});
@@ -33,10 +34,10 @@ public class DemoUI extends UI
     	// Show it in the middle of the screen
     	final VerticalLayout layout = new VerticalLayout();
         layout.setStyleName("demoContentLayout");
-        layout.setSizeFull();
+        //layout.setSizeFull();
         layout.addComponent(virtualkeyboard);
         layout.addComponent(textField);
-        layout.setComponentAlignment(virtualkeyboard, Alignment.MIDDLE_CENTER);
+        //layout.setComponentAlignment(virtualkeyboard, Alignment.MIDDLE_CENTER);
         setContent(layout);
 
     }

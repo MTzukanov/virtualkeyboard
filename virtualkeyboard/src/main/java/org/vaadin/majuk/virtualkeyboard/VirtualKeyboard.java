@@ -16,7 +16,7 @@ import com.vaadin.ui.Notification;
 
 // This is the server-side UI component that provides public API 
 // for VirtualKeyboard
-@JavaScript("virtualkeyboard.js")
+@JavaScript({"virtualkeyboard.js", "keyboards.js"})
 public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	
 	List<KeyListener> listenerList;
@@ -48,8 +48,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 				
         registerRpc(new KeyClickRpc() {
             public void onKeyClick(String s) {
-                //Notification.show("Clicked on [" + s + "]");
-                
                 for (KeyListener keyListener : listenerList) {
 					keyListener.keyPress(new KeyEvent(VirtualKeyboard.this, s));
 				}
@@ -57,7 +55,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
         });
 
         this.getState().container = "keyboard_container"; 
-		System.out.println("constructor");
 	}
 
 	public static class State extends JavaScriptComponentState {
