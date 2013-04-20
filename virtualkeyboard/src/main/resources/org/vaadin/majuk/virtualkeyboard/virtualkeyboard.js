@@ -12,7 +12,8 @@ window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
     rpcProxy = this.getRpcProxy();
    
 	this.onStateChange = function() {
-		container.innerHTML = '<div id="keyboard_container"></div>';
+		this.getElement().innerHTML = '<div id="keyboard_container"></div>';
+		container = document.getElementById('keyboard_container');
 		current_layout = this.getState().current_layout;
 		generate_keyboard(container, current_layout, current_sub_layout);
 	}
@@ -64,7 +65,15 @@ function key_pressed(value)
 	}
 }
 
-var generate_keyboard = function(container, layout, sub_layout)
+function select_layout_change()
+{
+    var selectBox = document.getElementById('virtual_keyboard_selector');
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    generate_keyboard(container, selectedValue, 'default');
+    this.getState().current_layout = selectedValue;
+}
+
+var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
 {
 	current_layout = layout;
 	current_sub_layout = sub_layout;
@@ -79,6 +88,26 @@ var generate_keyboard = function(container, layout, sub_layout)
 			add_button(container, key_value_to_title(keys[i]), keys[i]);
 		}
 		container.innerHTML += ("<br>");
+	}
+	
+	if (dropbox)
+	{
+		  var newselect = document.createElement('select');
+		  newselect.setAttribute('onchange', 'select_layout_change()');
+		  newselect.setAttribute('id', 'virtual_keyboard_selector');
+		  newselect.setAttribute('class', 'virtual_keyboard_selector');
+		  container.appendChild(newselect);
+
+		  for (layout in keyboards)
+		  {
+			  var newoption = document.createElement('option');
+			  newoption.innerHTML = keyboard_human_names[layout];
+			  newoption.value = layout;
+			  newoption.setAttribute('class', 'virtual_keyboard_selector');
+			  if (current_layout == layout)
+				  newoption.setAttribute('selected', 'selected');
+			  newselect.appendChild(newoption);			  
+		  }
 	}
 }
 
