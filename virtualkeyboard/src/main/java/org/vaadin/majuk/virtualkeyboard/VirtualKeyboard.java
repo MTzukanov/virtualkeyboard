@@ -156,7 +156,7 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 		if(!isFloatingWindow) {
 			return null;
 		}
-		
+		 
 		if(keyboardWindow == null) {
 			keyboardWindow = new Window();
 	    	keyboardWindow.setCaption("Virtual Keyboard");
