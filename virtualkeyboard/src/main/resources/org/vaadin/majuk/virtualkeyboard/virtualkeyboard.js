@@ -9,12 +9,14 @@ var caps_lock = false;
 var show_lang_dropbox = true;
 
 window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
-    container = this.getElement();
     rpcProxy = this.getRpcProxy();
    
 	this.onStateChange = function() {
-		this.getElement().innerHTML = '<div id="keyboard_container"></div>';
-		container = document.getElementById('keyboard_container');
+		  var newdiv = document.createElement('div');
+		  newdiv.setAttribute('id', 'keyboard_container');
+		  this.getElement().appendChild(newdiv);
+		  container = newdiv;
+		  
 		current_layout = this.getState().current_layout;
 		//show_lang_dropbox = current_layout = this.getState().show_lang_dropbox;
 		generate_keyboard(container, current_layout, current_sub_layout, show_lang_dropbox);
@@ -37,7 +39,7 @@ function add_button(container, title, value) {
 }
 
 function key_pressed(value)
-{
+{	
 	if (value.length == 1)
 	{	
 		rpcProxy.onKeyClick(value);
@@ -79,7 +81,7 @@ function select_layout_change()
     var selectBox = document.getElementById('virtual_keyboard_selector');
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
     generate_keyboard(container, selectedValue, 'default');
-    //rpcProxy.onLayoutChange(selectedValue);
+    rpcProxy.onLayoutChange(selectedValue);
 }
 
 var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
