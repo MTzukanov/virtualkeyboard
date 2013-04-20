@@ -7,7 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.vaadin.majuk.virtualkeyboard.VirtualKeyboard.KeyListener;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.event.FieldEvents.BlurEvent;
+import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.event.FieldEvents.FocusEvent;
 import com.vaadin.event.FieldEvents.FocusListener;
 import com.vaadin.shared.MouseEventDetails;
@@ -19,15 +22,21 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Component.Event;
+import com.vaadin.ui.Window.CloseEvent;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 // This is the server-side UI component that provides public API 
 // for VirtualKeyboard
 @JavaScript({"virtualkeyboard.js", "keyboards.js"})
 public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	
-	List<KeyListener> listenerList;
-	List<AbstractTextField> components;
+	private List<KeyListener> listenerList;
+	private List<AbstractTextField> components;
 	private AbstractTextField focusedTextField;
+	private AbstractTextField bluredTextField;
+	private Window keyboardWindow;
+	private boolean isFloatingWindow;
 	
 	public interface KeyListener {
 		void keyPress(VirtualKeyboard.KeyEvent event);
@@ -49,11 +58,13 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 
 	public interface KeyClickRpc extends ServerRpc {
 	    public void onKeyClick(String s);
+	    public void onLayoutChange(String layoutName);
 	}	
 
 	public VirtualKeyboard(){
 		listenerList = new ArrayList<KeyListener>();
 		components = new ArrayList<AbstractTextField>();
+		
 				
         registerRpc(new KeyClickRpc() {
             public void onKeyClick(String s) {
@@ -62,15 +73,18 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
             	{
             		int curPos = focusedTextField.getCursorPosition();
             		String oldText = focusedTextField.getValue();
-            		if(s != null && s == "{bksp}") {
+            		
+            		if(s != null && s.equals("\b") && curPos > 0) {
             			focusedTextField.setValue(oldText.substring(0,curPos-1) + oldText.substring(curPos,oldText.length()));
+            			focusedTextField.setCursorPosition(curPos-1);
             		}
-            		else {
+            		else if(s != null && s.equals("\n")) {
+            			focusedTextField.setValue(oldText.substring(0,curPos) + s + oldText.substring(curPos,oldText.length()));
+            			focusedTextField.setCursorPosition(curPos);
+            		} else {
             			focusedTextField.setValue(oldText.substring(0,curPos) + s + oldText.substring(curPos,oldText.length()));
             			focusedTextField.setCursorPosition(curPos+1);
             		}
-
-            		
             		focusedTextField.focus();
             	}
             	
@@ -78,9 +92,15 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 					keyListener.keyPress(new KeyEvent(VirtualKeyboard.this, s));
 				}
             }
+
+			@Override
+			public void onLayoutChange(String layoutName) {
+				// 
+				
+			}
         });
 
-        this.getState().current_layout = "sv"; 
+        this.getState().current_layout = "sv";
 	}
 
 	public static class State extends JavaScriptComponentState {
@@ -99,7 +119,7 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 		listenerList.remove(keyListener);
 	}
 	
-	public void attachComponent(AbstractTextField component) {
+	public void attachComponent(final AbstractTextField component) {
 		components.add(component);
 		
 		component.addFocusListener(new FocusListener() {
@@ -107,12 +127,51 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 			@Override
 			public void focus(FocusEvent event) {
 				focusedTextField = (AbstractTextField) event.getComponent();
-				
+				if(isFloatingWindow) {
+					if(keyboardWindow == null)
+						keyboardWindow = getWindow();
+	
+					if (keyboardWindow.getParent() == null)
+						component.getUI().addWindow(keyboardWindow);
+					keyboardWindow.setVisible(true);
+				}
 			}
 		});
+		
+		component.addBlurListener(new BlurListener() {
+			
+			@Override
+			public void blur(BlurEvent event) {
+				bluredTextField = (AbstractTextField) event.getComponent();
+			}
+		} );
 	}
 	
 	public void dettachComponent(AbstractTextField component) {
 		components.remove(component);
+		//TODO add remove event listener
 	}
+
+	public Window getWindow() {
+		if(!isFloatingWindow) {
+			return null;
+		}
+		
+		if(keyboardWindow == null) {
+			keyboardWindow = new Window();
+	    	keyboardWindow.setCaption("Virtual Keyboard");
+			keyboardWindow.setPositionX(200);
+			keyboardWindow.setPositionY(100);
+			keyboardWindow.setWidth("600");
+			keyboardWindow.setHeight("300");
+			keyboardWindow.setVisible(false);
+			keyboardWindow.setContent(this);
+		}
+		return keyboardWindow;
+	}
+
+	public void setFloatingWindow(boolean floating) {
+		isFloatingWindow = floating;
+	}
+
 }
