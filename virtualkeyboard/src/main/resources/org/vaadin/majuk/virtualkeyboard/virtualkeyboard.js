@@ -89,5 +89,5 @@ function key_value_to_title(value) {
 	if (current_layout in key_value_dict)
 		return key_value_dict[current_layout][value];
 	else
-		return key_value_dict['default'][value]
+		return key_value_dict['default'][value];
 }
