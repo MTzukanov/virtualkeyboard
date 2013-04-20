@@ -81,7 +81,7 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-VirtualKeyboard is written by <Kambiz Shahim, Michael Tzukanov, Julien Dhallenne>
+VirtualKeyboard is written by Kambiz Shahim, Michael Tzukanov and Julien Dhallenne
 
 # Developer Guide
 
