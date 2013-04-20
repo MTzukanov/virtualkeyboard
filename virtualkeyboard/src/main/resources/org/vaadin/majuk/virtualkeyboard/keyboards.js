@@ -9,12 +9,6 @@ var key_value_dict = { 'default': {
 },
 };
 
-var keyboard_human_names = 
-{
-		'sv': 'Swedish',
-		'fi': 'Finnish',
-}
-
 /* qwerty by Mika Perreri Korhonen (https://github.com/jouk0) - */
 var keyboards = {
 'sv': {
