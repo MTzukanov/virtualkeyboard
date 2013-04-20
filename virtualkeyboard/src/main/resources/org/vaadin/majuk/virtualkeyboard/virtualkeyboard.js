@@ -5,12 +5,12 @@ window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
     rpcProxy = this.getRpcProxy();
 	
 	this.onStateChange = function() {
-		this.getElement().innerHTML = //'<button onclick="generate_keyboard(\'keyboard_container\', keyboard_sv)">Generate Keyboard</button>\
+		//element.innerHTML = //'<button onclick="generate_keyboard(\'keyboard_container\', keyboard_sv)">Generate Keyboard</button>\
 		//<input type="text" id="target">\
-		'<div id="keyboard_container">\
-		</div>';
+		//'<div id="keyboard_container">\
+		//</div>';
 		
-		generate_keyboard('keyboard_container', keyboard_sv);
+		generate_keyboard(element, keyboard_sv);
 	}
 }
 
@@ -40,13 +40,11 @@ var keyboard_sv = {
 };
 
 function add_button(container, title, value) {
-  var parent = document.getElementById(container);
-
   var newdiv = document.createElement('button');
 
   newdiv.innerHTML = title;
   newdiv.setAttribute('onclick', 'key_pressed("'+value+'");');
-  parent.appendChild(newdiv);
+  container.appendChild(newdiv);
 }
 
 function key_pressed(value)
@@ -75,7 +73,7 @@ var generate_keyboard = function(container, keyboard)
 		{
 			add_button(container, keys[i], keys[i]);
 		}
-		document.getElementById(container).innerHTML += ("<br>");
+		container.innerHTML += ("<br>");
 	}
 }
 
