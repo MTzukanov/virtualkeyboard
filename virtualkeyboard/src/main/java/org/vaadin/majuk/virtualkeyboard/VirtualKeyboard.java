@@ -3,27 +3,14 @@ package org.vaadin.majuk.virtualkeyboard;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.vaadin.majuk.virtualkeyboard.VirtualKeyboard.KeyListener;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
 import com.vaadin.annotations.JavaScript;
-import com.vaadin.event.FieldEvents.BlurEvent;
-import com.vaadin.event.FieldEvents.BlurListener;
 import com.vaadin.event.FieldEvents.FocusEvent;
 import com.vaadin.event.FieldEvents.FocusListener;
-import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.shared.communication.ServerRpc;
 import com.vaadin.shared.ui.JavaScriptComponentState;
-import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.Component.Event;
-import com.vaadin.ui.Window.CloseEvent;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 // This is the server-side UI component that provides public API 
@@ -34,7 +21,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	private List<KeyListener> listenerList;
 	private List<AbstractTextField> components;
 	private AbstractTextField focusedTextField;
-	private AbstractTextField bluredTextField;
 	private Window keyboardWindow;
 	private boolean isFloatingWindow = false;
 	
@@ -94,8 +80,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 
 			@Override
 			public void onLayoutChange(String layoutName) {
-				System.out.println("Changed layout");
-				Notification.show("Clicked on [" + layoutName + "]");
 				VirtualKeyboard.this.getState().current_layout = layoutName;
 			}
         });
@@ -105,6 +89,17 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 
 	public static class State extends JavaScriptComponentState {
 		public String current_layout;
+		public boolean show_lang_dropbox = true;
+	}
+	
+	public void setLanguageDropboxVisible(boolean show)
+	{
+		this.getState().show_lang_dropbox = show;
+	}
+
+	public boolean getLanguageDropboxVisible()
+	{
+		return this.getState().show_lang_dropbox;
 	}
 	
 	public State getState() {
@@ -137,14 +132,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 				}
 			}
 		});
-		
-		component.addBlurListener(new BlurListener() {
-			
-			@Override
-			public void blur(BlurEvent event) {
-				bluredTextField = (AbstractTextField) event.getComponent();
-			}
-		} );
 	}
 	
 	public void dettachComponent(AbstractTextField component) {

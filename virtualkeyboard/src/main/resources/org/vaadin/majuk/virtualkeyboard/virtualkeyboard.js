@@ -1,7 +1,7 @@
 var key_value_to_char = { '{tab}': '\t', '{bksp}': '\b', '{enter}': '\n', '{space}': ' ' };
 
 var rpcProxy;
-var container;
+var container = null;
 
 var current_layout = 'sv';
 var current_sub_layout = 'default';
@@ -12,13 +12,15 @@ window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
     rpcProxy = this.getRpcProxy();
    
 	this.onStateChange = function() {
+		if (!document.getElementById('keyboard_container')) {
 		  var newdiv = document.createElement('div');
 		  newdiv.setAttribute('id', 'keyboard_container');
 		  this.getElement().appendChild(newdiv);
 		  container = newdiv;
-		  
+		}
+		
 		current_layout = this.getState().current_layout;
-		//show_lang_dropbox = current_layout = this.getState().show_lang_dropbox;
+		show_lang_dropbox = this.getState().show_lang_dropbox;
 		generate_keyboard(container, current_layout, current_sub_layout, show_lang_dropbox);
 	}
 }
