@@ -36,7 +36,7 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	private AbstractTextField focusedTextField;
 	private AbstractTextField bluredTextField;
 	private Window keyboardWindow;
-	private boolean isFloatingWindow;
+	private boolean isFloatingWindow = false;
 	
 	public interface KeyListener {
 		void keyPress(VirtualKeyboard.KeyEvent event);
@@ -64,7 +64,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	public VirtualKeyboard(){
 		listenerList = new ArrayList<KeyListener>();
 		components = new ArrayList<AbstractTextField>();
-		
 				
         registerRpc(new KeyClickRpc() {
             public void onKeyClick(String s) {
@@ -95,8 +94,9 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 
 			@Override
 			public void onLayoutChange(String layoutName) {
-				// 
-				
+				System.out.println("Changed layout");
+				Notification.show("Clicked on [" + layoutName + "]");
+				VirtualKeyboard.this.getState().current_layout = layoutName;
 			}
         });
 
@@ -160,12 +160,13 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 		if(keyboardWindow == null) {
 			keyboardWindow = new Window();
 	    	keyboardWindow.setCaption("Virtual Keyboard");
-			keyboardWindow.setPositionX(200);
-			keyboardWindow.setPositionY(100);
-			keyboardWindow.setWidth("600");
-			keyboardWindow.setHeight("300");
+			//keyboardWindow.setPositionX(200);
+			//keyboardWindow.setPositionY(100);
+			//keyboardWindow.setWidth("600");
+			//keyboardWindow.setHeight("300");
 			keyboardWindow.setVisible(false);
 			keyboardWindow.setContent(this);
+			keyboardWindow.setResizable(false);
 		}
 		return keyboardWindow;
 	}
