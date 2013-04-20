@@ -1,0 +1,40 @@
+#keyboard_container {
+	margin: 100px auto;  
+	font: 71%/ Verdana, Sans-Serif; 
+	background: #eee; 
+	text-align: center;
+}
+
+    #keyboard_container button {
+        font-size: 1.2em;
+        margin: 0 5px 5px 0;
+ 		background: #fff;
+ 		border: 1px solid #f9f9f9;
+        -moz-border-radius: 5px;  
+	    -webkit-border-radius: 5px;
+	    width: 30px;
+	    height: 30px;  
+	}
+
+
+		#keyboard_container .shift {
+			width: 60px; 
+		}
+		#keyboard_container .tab {
+			width: 70px;  
+		}
+		#keyboard_container .bksp {
+			width: 77px;
+		}
+		#keyboard_container .space {
+			width: 70%;
+		}
+		#keyboard_container .alt {
+			width: 35px;
+		}
+		#keyboard_container .cplk {
+			width: 80px;  
+		}
+		#keyboard_container .enter {
+			width: 100px;  
+		}
