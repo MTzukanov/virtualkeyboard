@@ -25,7 +25,14 @@ function add_button(container, title, value) {
   var newbutton = document.createElement('button');
   newbutton.innerHTML = title;
   newbutton.setAttribute('onclick', 'key_pressed("'+value+'");');
-  newbutton.setAttribute('class', 'virtual_key ' + value.slice(1, -1));
+  var additional_classes = ' ' + value.slice(1, -1);
+  if (   (current_sub_layout == 'shift' && value == '{shift}')
+	  || (caps_lock && value == '{cplk}')
+	  || (current_sub_layout == 'alt' && value == '{alt}')
+	 )
+	  additional_classes += ' pressed';	
+	  
+  newbutton.setAttribute('class', 'virtual_key' + additional_classes);
   container.appendChild(newbutton);
 }
 
