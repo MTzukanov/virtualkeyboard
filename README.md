@@ -23,10 +23,12 @@ To see the demo, navigate to http://localhost:8080/
 
 For further development of this add-on, the following tool-chain is recommended:
 - Eclipse IDE
-- m2e wtp plug-in (install it from Eclipse Marketplace)
+- Maven Integration for Eclipse plug-in (install it from Eclipse Marketplace)
+- Maven Integration for Eclipse WTP (Incubation) (install it from Eclipse Marketplace)
 - Vaadin Eclipse plug-in (install it from Eclipse Marketplace)
 - JRebel Eclipse plug-in (install it from Eclipse Marketplace)
-- Chrome browser
+- Run-Jetty-Run plug-in (install it from Eclipse Marketplace)
+- Firefox browser
 
 ### Importing project
 
@@ -58,8 +60,8 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 ## Roadmap
 
 This component is developed as a hobby with no public roadmap or any guarantees of upcoming releases. That said, the following features are planned for upcoming releases:
-- ...
-- ...
+- Chromium support
+- Keyboard resized if the window size is smaller then default keyboard size
 
 ## Issue tracking
 
@@ -79,7 +81,7 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-VirtualKeyboard is written by <...>
+VirtualKeyboard is written by <Kambiz Shahim, Michael Tzukanov, Julien Dhallenne>
 
 # Developer Guide
 
