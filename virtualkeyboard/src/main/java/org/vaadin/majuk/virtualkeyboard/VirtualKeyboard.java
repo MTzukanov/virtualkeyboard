@@ -106,6 +106,16 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	{
 		return this.getState().show_lang_dropbox;
 	}
+
+	public void setLayout(String layout)
+	{
+		this.getState().current_layout = layout;
+	}
+
+	public String getLayout()
+	{
+		return this.getState().current_layout;
+	}
 	
 	public State getState() {
 		return (State) super.getState();

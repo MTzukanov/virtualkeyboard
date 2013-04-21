@@ -36,10 +36,14 @@ $darkgreen: darken($green, 30%);
 	}
 	
 	.bigLabel {
-			font-size: 12pt;
+			font-size: 16pt;
 			font-weight: bold;
 	}
 	
+	.midLabel {
+			font-size: 12pt;
+	}
+
 	#textArea {
 			font-size: 16pt;
 	}
@@ -48,7 +52,7 @@ $darkgreen: darken($green, 30%);
 			font-size: 16pt;
 	}
 	
-	#textField0 {
+	#usernameTextField {
 			font-size: 16pt;
 	}
 	
