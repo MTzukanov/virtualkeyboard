@@ -20,6 +20,8 @@
 			<directory>..</directory>
 			<includes>
 				<include>LICENSE.txt</include>
+				<include>README.md</include>
+				<include>*.pdf</include>
 			</includes>
 		</fileSet>
 		<fileSet>

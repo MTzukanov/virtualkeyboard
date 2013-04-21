@@ -50,13 +50,6 @@ The most common way of debugging and making changes to the client-side code is d
 
 Another way of debugging client-side is superdev mode. To enable it, uncomment devModeRedirectEnabled line from the end of DemoWidgetSet.gwt.xml located under virtualkeyboard-demo resources folder and compile the widgetset once by running vaadin:compile Maven target for virtualkeyboard-demo. Refresh virtualkeyboard-demo project resources by right clicking the project and choosing Refresh. Click "Create SuperDevMode Launch" button on the Vaadin tab of the virtualkeyboard-demo project properties panel to create superder mode code server launch configuration and modify the class path as instructed above. After starting the code server by running SuperDevMode launch as Java application, you can navigate to http://localhost:8080/virtualkeyboard-demo/?superdevmode. Now all code changes you do to your client side will get compiled as soon as you reload the web page. You can also access Java-sources and set breakpoints inside Chrome if you enable source maps from inspector settings. 
 
- 
-## Release notes
-
-### Version 0.0.1-SNAPSHOT
-- ...
-- ...
-
 ## Roadmap
 
 This component is developed as a hobby with no public roadmap or any guarantees of upcoming releases. That said, the following features are planned for upcoming releases:
@@ -90,7 +83,12 @@ VirtualKeyboard is written by Kambiz Shahim, Michael Tzukanov and Julien Dhallen
 
 Here is a simple example on how to try out the add-on component:
 
-<...>
+VirtualKeyboard virtualkeyboard = new VirtualKeyboard()
+virtualkeyboard.setFloatingWindow(true);
+virtualkeyboard.getWindow().setPositionX(200);
+virtualkeyboard.getWindow().setPositionY(200);
+TextField textField = new TextField();
+virtualkeyboard.attachComponent(textField);
 
 For a more comprehensive example, see src/test/java/org/vaadin/template/demo/DemoUI.java
 
