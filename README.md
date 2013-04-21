@@ -99,17 +99,16 @@ For a more comprehensive example, see src/test/java/org/vaadin/template/demo/Dem
 
 ## Features
 
-### Feature A
 Several display modes:
-- In a window
-- As a component
-- Attached to a text element
+- In a floating window
+- As an inline component
 
-### Feature B
+Can be attached to multiple text elements
+
 Has several layouts, for now the following are supported:
 - English US
-- Swedish
 - Finnish
+- Swedish
 - Albanian (qwerty)
 - Albanian (qwertz)
 - Arabic (azerty)
@@ -146,9 +145,12 @@ Has several layouts, for now the following are supported:
 - Turkish (f)
 - Vietnamese (qwerty)
 
-### Feature B
 The layout can be either defined from the server side or by the user
 
+Currently tested only in Firefox browser.
+
 ## API
+
+Please consult the following document:
 
 https://github.com/MTzukanov/virtualkeyboard/blob/master/VirtualKeyboarddocumentation.pdf
