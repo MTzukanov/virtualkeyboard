@@ -61,6 +61,7 @@ Another way of debugging client-side is superdev mode. To enable it, uncomment d
 
 This component is developed as a hobby with no public roadmap or any guarantees of upcoming releases. That said, the following features are planned for upcoming releases:
 - Chromium support
+- Caps Lock to add to most of the keyboard
 - Keyboard resized if the window size is smaller then default keyboard size
 
 ## Issue tracking
@@ -125,8 +126,7 @@ Has several layouts, for now the following are supported:
 - German (qwertz-1)
 - German (qwertz-2)
 - Hebrew (qwerty)
-- Magyar (qwertz-1) utf8
-- Magyar (qwertz-2) utf8
+- Magyar (qwertz-2) utf8 
 - Magyar (qwertz-1) ansi
 - Magyar (qwertz-2) ansi
 - Japanese (qwerty)
@@ -141,6 +141,7 @@ Has several layouts, for now the following are supported:
 - Thai (qwerty)
 - Turkish (q)
 - Turkish (f)
+- Vietnamese (qwerty)
 
 ## API
 

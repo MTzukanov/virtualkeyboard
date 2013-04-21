@@ -16,6 +16,7 @@ var keyboard_human_names =
 		'fi': 'Finnish',
 }
 
+/* Keyboards from https://github.com/Mottie/Keyboard */
 var keyboard_names = [
 	"Albanian (qwerty):albanian-qwerty",
 	"Albanian (qwertz):albanian-qwertz",
@@ -36,7 +37,7 @@ var keyboard_names = [
 	"German (qwertz-1):german-qwertz-1",
 	"German (qwertz-2):german-qwertz-2",
 	"Hebrew (qwerty):hebrew-qwerty",
-	"Magyar (qwertz-1) utf8:hungarian-qwertz-1",
+	/*"Magyar (qwertz-1) utf8:hungarian-qwertz-1",*/
 	"Magyar (qwertz-2) utf8:hungarian-qwertz-2",
 	"Magyar (qwertz-1) ansi:hungarianansi-qwertz-1",
 	"Magyar (qwertz-2) ansi:hungarianansi-qwertz-2",
@@ -455,21 +456,21 @@ keyboards['albanian-qwerty'] = {
         };
     keyboards['danish-qwerty'] = {
         'default' : [
-            "\u00a7 1 2 3 4 5 6 7 8 9 0 + \u0301 {b}",
+            "\u00a7 1 2 3 4 5 6 7 8 9 0 + \u0301 {bksp}",
             "{tab} q w e r t y u i o p \u00e5 \u00a8",
             "a s d f g h j k l \u00e6 \u00f8 ' {enter}",
             "{shift} < z x c v b n m , . - {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ],
         'shift' : [
-            '\u00bd ! " # \u00a4 % & / ( ) = ? \u0300 {b}',
+            '\u00bd ! " # \u00a4 % & / ( ) = ? \u0300 {bksp}',
             "{tab} Q W E R T Y U I O P \u00c5 ^",
             "A S D F G H J K L \u00c6 \u00d8 * {enter}",
             "{shift} > Z X C V B N M ; : _ {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ],
         'alt' : [
-            '\u00a7 1 @ \u00a3 $ 5 6 { [ ] } + | {b}',
+            '\u00a7 1 @ \u00a3 $ 5 6 { [ ] } + | {bksp}',
             '{tab} q w â‚¬ r t y u i o p \u00e5 ~',
             "a s d f g h j k l \u00e6 \u00f8 ' {enter}",
             '{shift} \\ z x c v b n \u00b5 , . - {shift}',
@@ -575,51 +576,51 @@ keyboards['albanian-qwerty'] = {
             "{accept} {alt} {space} {alt} {cancel}"
         ]
     };
-    keyboards['hungarian-qwertz-1'] = {
-        'default' : [
-            "0 1 2 3 4 5 6 7 8 9 Ã¶ Ã¼ Ã³ Å± {bksp}",
-            "{tab} q w e r t z u i o p Å‘ Ãº",
-            "a s d f g h j k l Ã© Ã¡ {enter}",
-            "{shift} Ã­ y x c v b n m , . - {shift}",
-            "{accept} {alt} {space} {alt} {cancel}"
-        ],
-        'shift' : [
-            'Â§ \u0027 " + ! % / = ( ) Ã– Ãœ Ã“ Å° {bksp}',
-            "{tab} Q W E R T Z U I O P Å Ãš",
-            "A S D F G H J K L Ã‰ Ã {enter}",
-            "{shift} Ã Y X C V B N M ; : _ {shift}",
-            "{accept} {alt} {space} {alt} {cancel}"
-        ],
-        'alt' : [
-        '{sp:1} ~ Ë‡ ^ Ë˜ Â° Ë› ` Ë™ Â´ Ë Â¨ Â¸ Â¤ {bksp}',  // most of non used
-        '{tab} \\ | Ã„ {sp:1} {sp:1} {sp:1} â‚¬ Ã {sp:1} {sp:1} Ã· Ã—',
-        'Ã¤ Ä‘ Ä [ ] {sp:1} Ã­ Å‚ Å $ ÃŸ {enter}',
-        '{shift} < > # & @ { } < ; > * {shift}',
-            '{accept} {alt} {space} {alt} {cancel}'
-        ]
-    };
+   /* keyboards['hungarian-qwertz-1'] = {
+		'default' : [
+		     		"0 1 2 3 4 5 6 7 8 9 ö ü ó ű {bksp}",
+		     		"{tab} q w e r t z u i o p ő ú",
+		     		"a s d f g h j k l é á {enter}",
+		     		"{shift} í y x c v b n m , . - {shift}",
+		     		"{accept} {alt} {space} {alt} {cancel}"
+		     	],
+		     	'shift' : [
+		     		'§ \u0027 " + ! % / = ( ) Ö Ü Ó Ű {bksp}',
+		     		"{tab} Q W E R T Z U I O P Ő Ú",
+		     		"A S D F G H J K L É Á {enter}",
+		     		"{shift} Í Y X C V B N M ; : _ {shift}",
+		     		"{accept} {alt} {space} {alt} {cancel}"
+		     	],
+		     	'alt' : [
+		         '{sp:1} ~ ˇ ^ ˘ ° ˛ ` ˙ ´ ˝ ¨ ¸ ¤ {bksp}',  // most of non used
+		         '{tab} \\ | Ä {sp:1} {sp:1} {sp:1} € Í {sp:1} {sp:1} ÷ ×',
+		         'ä đ Đ [ ] {sp:1} í ł Ł $ ß {enter}',
+		         '{shift} < > # & @ { } < ; > * {shift}',
+		     		'{accept} {alt} {space} {alt} {cancel}'
+		     	]
+    };*/
     keyboards['hungarian-qwertz-2'] = {
-        'default' : [
-            "0 1 2 3 4 5 6 7 8 9 Ã¶ Ã¼ Ã³ {bksp}",
-            "{tab} q w e r t z u i o p Å‘ Ãº",
-            "a s d f g h j k l Ã© Ã¡ Å± {enter}",
-            "{shift} Ã­ y x c v b n m , . - {shift}",
-            "{accept} {alt} {space} {alt} {cancel}"
-        ],
-        'shift' : [
-            'Â§ \u0027 " + ! % / = ( ) Ã– Ãœ Ã“ {bksp}',
-            "{tab} Q W E R T Z U I O P Å Ãš",
-            "A S D F G H J K L Ã‰ Ã Å° {enter}",
-            "{shift} Ã Y X C V B N M ; : _ {shift}",
-            "{accept} {alt} {space} {alt} {cancel}"
-        ],
-        'alt' : [
-        '{sp:1} ~ Ë‡ ^ Ë˜ Â° Ë› ` Ë™ Â´ Ë Â¨ Â¸ {bksp}',  // most of non used
-        '{tab} \\ | Ã„ {sp:1} {sp:1} {sp:1} â‚¬ Ã {sp:1} {sp:1} Ã· Ã—',
-        'Ã¤ Ä‘ Ä [ ] {sp:1} Ã­ Å‚ Å $ ÃŸ Â¤ {enter}',
-        '{shift} < > # & @ { } < ; > * {shift}',
-            '{accept} {alt} {space} {alt} {cancel}'
-        ]
+		'default' : [
+		     		"0 1 2 3 4 5 6 7 8 9 ö ü ó {bksp}",
+		     		"{tab} q w e r t z u i o p ő ú",
+		     		"a s d f g h j k l é á ű {enter}",
+		     		"{shift} í y x c v b n m , . - {shift}",
+		     		"{accept} {alt} {space} {alt} {cancel}"
+		     	],
+		     	'shift' : [
+		     		'§ \u0027 " + ! % / = ( ) Ö Ü Ó {bksp}',
+		     		"{tab} Q W E R T Z U I O P Ő Ú",
+		     		"A S D F G H J K L É Á Ű {enter}",
+		     		"{shift} Í Y X C V B N M ; : _ {shift}",
+		     		"{accept} {alt} {space} {alt} {cancel}"
+		     	],
+		     	'alt' : [
+		         '{sp:1} ~ ˇ ^ ˘ ° ˛ ` ˙ ´ ˝ ¨ ¸ {bksp}',  // most of non used
+		         '{tab} \\ | Ä {sp:1} {sp:1} {sp:1} € Í {sp:1} {sp:1} ÷ ×',
+		         'ä đ Đ [ ] {sp:1} í ł Ł $ ß ¤ {enter}',
+		         '{shift} < > # & @ { } < ; > * {shift}',
+		     		'{accept} {alt} {space} {alt} {cancel}'
+		     	]
     };
     keyboards['hungarianansi-qwertz-1'] = {
         'default' : [
@@ -892,7 +893,7 @@ keyboards['albanian-qwerty'] = {
     keyboards['thai-qwerty'] = {
         'default' : [
             "\u005F \u0E45 \u002F \u002D \u0E20 \u0E16 \u0E38 \u0E36 \u0E04 \u0E05 \u0E08 \u0E02 \u0E0A {bksp}",
-            "{tab} \u0E46 \u0E44 \u0E33 \u0E1E \u0E30 \u0E31 \u0E35 \u0E23 \u0E19 \u0E22 \u0E1A \u0E25 \u0E03 ",
+            "{tab} \u0E46 \u0E44 \u0E33 \u0E1E \u0E30 \u0E31 \u0E35 \u0E23 \u0E19 \u0E22 \u0E1A \u0E25 \u0E03",
             "\u0E1F \u0E2B \u0E01 \u0E14 \u0E40 \u0E49 \u0E48 \u0E32 \u0E2A \u0E27 \u0E07 {enter}",
             "{shift} \u0E1C \u0E1B \u0E41 \u0E2D \u0E34 \u0E37 \u0E17 \u0E21 \u0E43 \u0E1D {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
@@ -923,21 +924,21 @@ keyboards['albanian-qwerty'] = {
         'default' : [
             "\u0022 1 2 3 4 5 6 7 8 9 0 \u002a \u002d {bksp}",
             "{tab} q w e r t y u \u0131 o p \u011f \u00fc",
-            "{lock} a s d f g h j k l \u015f \u0069 , {enter}",
+            "{cplk} a s d f g h j k l \u015f \u0069 , {enter}",
             "{shift} < z x c v b n m \u00f6 \u00e7 . {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ],
         'shift' : [
             '\u00e9 ! \u0027 \u0302 + % & / ( ) = ? \u005f {bksp}',
             "{tab} Q W E R T Y U \u0049 O P \u011e \u00DC",
-            "{lock} A S D F G H J K L \u015e \u0130 ; {enter}",
+            "{cplk} A S D F G H J K L \u015e \u0130 ; {enter}",
             "{shift} > Z X C V B N M \u00d6 \u00c7 : {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ],
         'alt' : [
             "\u0022 1 \u00a3 # $ \u00bd 6 { [ ] } \u005c \u002d {bksp}",
             "{tab} @ w \u20ac r t y u \u0131 o p \u0308 \u0303",
-            "{lock} a s d f g h j k l \u0301 \u0069 \u0300 {enter}",
+            "{cplk} a s d f g h j k l \u0301 \u0069 \u0300 {enter}",
             "{shift} | z x c v b n m \u00f6 \u00e7 . {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ]
@@ -946,21 +947,21 @@ keyboards['albanian-qwerty'] = {
         'default' : [
             "\u002B \u0031 \u0032 \u0033 \u0034 \u0035 \u0036 \u0037 \u0038 \u0039 \u0030 \u002F \u002D {bksp}",
             "{tab} \u0066 \u0067 \u011F \u0131 \u006F \u0064 \u0072 \u006E \u0068 \u0070 \u0071 \u0077",
-            "{lock} \u0075 \u0069 \u0065 \u0061 \u00FC \u0074 \u006B \u006D \u006C \u0079 \u015F \u0078 {enter}",
+            "{cplk} \u0075 \u0069 \u0065 \u0061 \u00FC \u0074 \u006B \u006D \u006C \u0079 \u015F \u0078 {enter}",
             "{shift} \u003C \u006A \u00F6 \u0076 \u0063 \u00E7 \u007A \u0073 \u0062 \u002E \u002C {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ],
         'shift' : [
             "\u002A \u0021 \u0022 \u0302 \u0024 \u0025 \u0026 \u0027 \u0028 \u0029 \u003D \u003F \u005F {bksp}",
             "{tab} \u0046 \u0047 \u011E \u0049 \u004F \u0044 \u0052 \u004E \u0048 \u0050 \u0051 \u0057",
-            "{lock} \u0055 \u0130 \u0045 \u0041 \u00DC \u0054 \u004B \u004D \u004C \u0059 \u015E \u0058 {enter}",
+            "{cplk} \u0055 \u0130 \u0045 \u0041 \u00DC \u0054 \u004B \u004D \u004C \u0059 \u015E \u0058 {enter}",
             "{shift} \u003E \u004A \u00D6 \u0056 \u0043 \u00C7 \u005A \u0053 \u0042 \u003A \u003B {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ],
         'alt' : [
             "\u00AC \u00B9 \u00B2 \u0023 \u00BC \u00BD \u00BE \u007B \u005B \u005D \u007D \u005C \u002D {bksp}",
             "{tab} \u0040 \u0067 \u011F \u0131 \u006F \u00A5 \u0072 \u006E \u0068 \u00A3 \u0308 \u0303",
-            "{lock} \u0075 \u00DF \u20AC \u0061 \u00FC \u0074 \u006B \u006D \u006C \u0301 \u015F \u0300 {enter}",
+            "{cplk} \u0075 \u00DF \u20AC \u0061 \u00FC \u0074 \u006B \u006D \u006C \u0301 \u015F \u0300 {enter}",
             "{shift} \u007C \u00AB \u00BB \u0076 \u0063 \u00E7 \u007A \u0073 \u00D7 \u00F7 \u002C {shift}",
             "{accept} {alt} {space} {alt} {cancel}"
         ]
