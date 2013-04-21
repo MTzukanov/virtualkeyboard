@@ -34,4 +34,30 @@ $darkgreen: darken($green, 30%);
              0px 34px 30px rgba(0,0,0,0.1);
         text-align: center;
 	}
+	
+	.bigLabel {
+			font-size: 12pt;
+			font-weight: bold;
+	}
+	
+	#textArea {
+			font-size: 16pt;
+	}
+	
+	#textArea1 {
+			font-size: 16pt;
+	}
+	
+	#textField0 {
+			font-size: 16pt;
+	}
+	
+	#textField1 {
+			font-size: 16pt;
+	}
+	
+	#password {
+			font-size: 16pt;
+	}
+
 }
