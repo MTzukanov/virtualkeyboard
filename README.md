@@ -4,7 +4,7 @@ VirtualKeyboard is an UI component add-on for Vaadin 7.
 
 ## Online demo
 
-Try the add-on demo at <url of the online demo>
+Try the add-on demo at http://virtualkeyboardforvaadin.jelastic.servint.net/demo/
 
 ## Download release
 
@@ -12,7 +12,7 @@ Official releases of this add-on are available at Vaadin Directory. For Maven in
 
 ## Building and running demo
 
-git clone <url of the VirtualKeyboard repository>
+git clone https://github.com/MTzukanov/virtualkeyboard.git
 mvn clean install
 cd demo
 mvn jetty:run
@@ -142,6 +142,9 @@ Has several layouts, for now the following are supported:
 - Turkish (q)
 - Turkish (f)
 - Vietnamese (qwerty)
+
+### Feature B
+The layout can be either defined from the server side or by the user
 
 ## API
 
