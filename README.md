@@ -96,17 +96,52 @@ For a more comprehensive example, see src/test/java/org/vaadin/template/demo/Dem
 ## Features
 
 ### Feature A
-
-<...>
+Several display modes:
+- In a window
+- As a component
+- Attached to a text element
+has x layouts
 
 ### Feature B
-
-<...>
-
-### Feature C
-
-<...>
+Has several layouts, for now the following are supported:
+- English US
+- Swedish
+- Finnish
+- Albanian (qwerty)
+- Albanian (qwertz)
+- Arabic (azerty)
+- Arabic (qwerty-1)
+- Arabic (qwerty-2)
+- Arabic (qwerty-3)
+- Arabic (qwerty-4)
+- Belarusian (Belarus)
+- Bengali (qwerty-1)
+- Bengali (qwerty-2
+- Bulgarian (qwerty)
+- Catalan (qwerty)
+- Danish (qwerty)
+- French (azerty-1)
+- French (azerty-2)
+- French (bepo v1.0rc2)
+- German (qwertz-1)
+- German (qwertz-2)
+- Hebrew (qwerty)
+- Magyar (qwertz-1) utf8
+- Magyar (qwertz-2) utf8
+- Magyar (qwertz-1) ansi
+- Magyar (qwertz-2) ansi
+- Japanese (qwerty)
+- Latvian (qwerty)
+- Polish (qwerty)
+- Portuguese (qwerty)
+- Russian (qwerty)
+- Spanish (qwerty)
+- Spanish (qwerty) special
+- Swedish (qwerty)
+- Swedish (dvorak)
+- Thai (qwerty)
+- Turkish (q)
+- Turkish (f)
 
 ## API
 
-VirtualKeyboard JavaDoc is available online at <...>
