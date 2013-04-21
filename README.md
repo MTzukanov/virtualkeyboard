@@ -100,7 +100,6 @@ Several display modes:
 - In a window
 - As a component
 - Attached to a text element
-has x layouts
 
 ### Feature B
 Has several layouts, for now the following are supported:
