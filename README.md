@@ -84,10 +84,15 @@ VirtualKeyboard is written by Kambiz Shahim, Michael Tzukanov and Julien Dhallen
 Here is a simple example on how to try out the add-on component:
 
 VirtualKeyboard virtualkeyboard = new VirtualKeyboard()
+
 virtualkeyboard.setFloatingWindow(true);
+
 virtualkeyboard.getWindow().setPositionX(200);
+
 virtualkeyboard.getWindow().setPositionY(200);
+
 TextField textField = new TextField();
+
 virtualkeyboard.attachComponent(textField);
 
 For a more comprehensive example, see src/test/java/org/vaadin/template/demo/DemoUI.java
@@ -146,3 +151,4 @@ The layout can be either defined from the server side or by the user
 
 ## API
 
+https://github.com/MTzukanov/virtualkeyboard/blob/master/VirtualKeyboarddocumentation.pdf
