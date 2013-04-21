@@ -12,11 +12,14 @@ import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.TextField;
+import com.vaadin.ui.PasswordField;
 
 // This is the server-side UI component that provides public API 
 // for VirtualKeyboard
 @JavaScript({"virtualkeyboard.js", "keyboards.js"})
 public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
+	//private static int instanceCount = 0;
 	
 	private List<KeyListener> listenerList;
 	private List<AbstractTextField> components;
@@ -54,24 +57,24 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
         registerRpc(new KeyClickRpc() {
             public void onKeyClick(String s) {
                 //Notification.show("Clicked on [" + s + "]");
+            	
             	if(focusedTextField != null)
-            	{
-            		int curPos = focusedTextField.getCursorPosition();
-            		String oldText = focusedTextField.getValue();
-            		
-            		if(s != null && s.equals("\b") && curPos > 0) {
-            			focusedTextField.setValue(oldText.substring(0,curPos-1) + oldText.substring(curPos,oldText.length()));
-            			focusedTextField.setCursorPosition(curPos-1);
-            		}
-            		else if(s != null && s.equals("\n")) {
-            			focusedTextField.setValue(oldText.substring(0,curPos) + s + oldText.substring(curPos,oldText.length()));
-            			focusedTextField.setCursorPosition(curPos);
-            		} else {
-            			focusedTextField.setValue(oldText.substring(0,curPos) + s + oldText.substring(curPos,oldText.length()));
-            			focusedTextField.setCursorPosition(curPos+1);
-            		}
-            		focusedTextField.focus();
-            	}
+                {
+	                int curPos = focusedTextField.getCursorPosition();
+	                String oldText = focusedTextField.getValue();
+	               
+	                if(s != null && s.equals("\b") && curPos > 0) {
+		                focusedTextField.setValue(oldText.substring(0,curPos-1) + oldText.substring(curPos,oldText.length()));
+		                focusedTextField.setCursorPosition(curPos-1);
+	                }
+	                else if(s != null && s.equals("\n") && (focusedTextField instanceof TextField || focusedTextField instanceof PasswordField)) {
+	                	//focusedTextField.setCursorPosition(curPos);
+	                } else {
+		                focusedTextField.setValue(oldText.substring(0,curPos) + s + oldText.substring(curPos,oldText.length()));
+		                focusedTextField.setCursorPosition(curPos+1);
+	                }
+	                focusedTextField.focus();
+                }
             	
                 for (KeyListener keyListener : listenerList) {
 					keyListener.keyPress(new KeyEvent(VirtualKeyboard.this, s));
@@ -84,12 +87,14 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 			}
         });
 
-        this.getState().current_layout = "sv";
+        this.getState().current_layout = "en";
+        //this.getState().instanceId = this.instanceCount++;
 	}
 
 	public static class State extends JavaScriptComponentState {
 		public String current_layout;
 		public boolean show_lang_dropbox = true;
+		//public int instanceId;
 	}
 	
 	public void setLanguageDropboxVisible(boolean show)
@@ -118,7 +123,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 		components.add(component);
 		
 		component.addFocusListener(new FocusListener() {
-			
 			@Override
 			public void focus(FocusEvent event) {
 				focusedTextField = (AbstractTextField) event.getComponent();
@@ -135,6 +139,7 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	}
 	
 	public void dettachComponent(AbstractTextField component) {
+		//component.removeFocusListener(listener)
 		components.remove(component);
 		//TODO add remove event listener
 	}

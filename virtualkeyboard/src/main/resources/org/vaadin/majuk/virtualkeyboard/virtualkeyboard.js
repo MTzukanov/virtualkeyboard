@@ -8,20 +8,34 @@ var current_sub_layout = 'default';
 var caps_lock = false;
 var show_lang_dropbox = true;
 
+//var instanceData = {};
+
 window.org_vaadin_majuk_virtualkeyboard_VirtualKeyboard = function () {
-    rpcProxy = this.getRpcProxy();
-   
 	this.onStateChange = function() {
-		if (!document.getElementById('keyboard_container')) {
+		//var container;
+		if (this.getElement().childNodes.length == 0) {
 		  var newdiv = document.createElement('div');
-		  newdiv.setAttribute('id', 'keyboard_container');
+		  newdiv.setAttribute('class', 'keyboard_container');
 		  this.getElement().appendChild(newdiv);
 		  container = newdiv;
 		}
-		
+
+	    rpcProxy = this.getRpcProxy();
 		current_layout = this.getState().current_layout;
 		show_lang_dropbox = this.getState().show_lang_dropbox;
 		generate_keyboard(container, current_layout, current_sub_layout, show_lang_dropbox);
+
+//		state = this.getState();
+//		if (!(state.instanceId in instanceData))
+//		{
+//			instanceData[state.instanceId] = {
+//					rpc_proxy: this.getRpcProxy(),
+//					container: = this.getElement().firstChild;
+//				};
+//		}
+//
+//		instanceData[state.instanceId].current_layout = this.getState().current_layout;
+//		instanceData[state.instanceId].show_lang_dropbox = this.getState().show_lang_dropbox;		
 	}
 }
 
@@ -78,9 +92,8 @@ function key_pressed(value)
 	}
 }
 
-function select_layout_change()
+function select_layout_change(selectBox)
 {
-    var selectBox = document.getElementById('virtual_keyboard_selector');
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
     generate_keyboard(container, selectedValue, 'default');
     rpcProxy.onLayoutChange(selectedValue);
@@ -110,8 +123,7 @@ var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
 	if (dropbox)
 	{
 		  var newselect = document.createElement('select');
-		  newselect.setAttribute('onchange', 'select_layout_change()');
-		  newselect.setAttribute('id', 'virtual_keyboard_selector');
+		  newselect.setAttribute('onchange', 'select_layout_change(this)');
 		  newselect.setAttribute('class', 'virtual_keyboard_selector');
 		  container.appendChild(newselect);
 
@@ -120,7 +132,6 @@ var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
 			  var newoption = document.createElement('option');
 			  newoption.innerHTML = keyboard_human_names[layout];
 			  newoption.value = layout;
-			  newoption.setAttribute('class', 'virtual_keyboard_selector');
 			  if (current_layout == layout)
 				  newoption.setAttribute('selected', 'selected');
 			  newselect.appendChild(newoption);			  

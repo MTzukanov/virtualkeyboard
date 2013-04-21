@@ -1,27 +1,27 @@
-#keyboard_container {
-	font: Verdana, Sans-Serif; /*71%*/
-	background: #eee; 
-	text-align: center;
-	width: 556px;
-	height: 180px;
-}
+		.keyboard_container {
+			font: Verdana, Sans-Serif; /*71%*/
+			background: #eee; 
+			text-align: center;
+			width: 556px;
+			height: 180px;
+		}
 
-   #keyboard_container .virtual_key {
-        font-size: 1.5em;
-        margin: 0 5px 5px 0;
- 		background: #fff;
- 		border: 1px solid #f9f9f9;
-        border-radius: 5px;  
-        box-shadow: 2px 2px 2px 1px rgba(50, 50, 50, 0.5);
-	    -webkit-border-radius: 5px;
-	    height: 30px;
-	    width: 30px;
-	}
+	   .keyboard_container .virtual_key {
+	        font-size: 1.5em !important;
+	        margin: 0 5px 5px 0;
+	 		background: #fff;
+	 		border: 1px solid #f9f9f9;
+	        border-radius: 5px;  
+	        box-shadow: 2px 2px 2px 1px rgba(50, 50, 50, 0.5);
+		    -webkit-border-radius: 5px;
+		    height: 30px;
+		    width: 30px;
+		}
 
-		 #virtual_keyboard_selector{
+		 .virtual_keyboard_selector{
 	 		width: 90px;
-	 		padding: 5px;
-	 		font-size: 1.3em;
+	 		padding: 5px !important;
+	 		font-size: 1.3em !important;
 	 		margin: 0 5px 5px 0;
 	 		background: #fff;
 	 		border: 1px solid #f9f9f9;
@@ -32,39 +32,39 @@
 		    height: 30px; 
 		 }
 		 
-		#keyboard_container .shift {
-			font-size: 1.3em;
+		.keyboard_container .shift {
+			font-size: 1.3em !important;
 			padding: 5px 4; 
 			width : 50px;
 		}
-		#keyboard_container .tab {
+		.keyboard_container .tab {
 			padding: 5px 18px; 
-			font-size: 1.3em;
+			font-size: 1.3em !important;
 			width: 60px;
 		}
-		#keyboard_container .bksp {
-			font-size: 1.3em;
+		.keyboard_container .bksp {
+			font-size: 1.3em !important;
 			padding: 5.5px;
 			width : 96px;
 		}
-		#keyboard_container .space {
+		.keyboard_container .space {
 			width: 330px;
 	}
-		#keyboard_container .alt {
-			font-size: 1.3em;
+		.keyboard_container .alt {
+			font-size: 1.3em !important;
 			width : 55px;
 		}
-		#keyboard_container .cplk {
-			font-size:10px;
+		.keyboard_container .cplk {
+			font-size:10px !important;
 			font-weight: bold;
 			vertical-align: middle;
 			width:50px;
 		}
-		#keyboard_container .enter {
-			font-size: 1.3em;
+		.keyboard_container .enter {
+			font-size: 1.3em !important;
 			padding: 5px 5; 
 			width:57px;
 		}
-		#keyboard_container .pressed {
+		.keyboard_container .pressed {
 			background-color: #d9d9d9;
 		}

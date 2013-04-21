@@ -11,7 +11,7 @@ var key_value_dict = { 'default': {
 
 var keyboard_human_names = 
 {
-		'en': 'English US',
+		'en': 'English',
 		'sv': 'Swedish',
 		'fi': 'Finnish',
 }
