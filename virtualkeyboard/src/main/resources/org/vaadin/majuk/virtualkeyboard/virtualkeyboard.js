@@ -60,9 +60,9 @@ function key_pressed(value)
 	{	
 		rpcProxy.onKeyClick(value);
 		if (!caps_lock)
-			generate_keyboard(container, current_layout, 'default');
+			generate_keyboard(container, current_layout, 'default', show_lang_dropbox);
 		else
-			generate_keyboard(container, current_layout, 'shift');
+			generate_keyboard(container, current_layout, 'shift', show_lang_dropbox);
 	}
 	else
 	{
@@ -72,22 +72,22 @@ function key_pressed(value)
 		}
 		else if ('{shift}' == value) {
 			if ('shift' == current_sub_layout || caps_lock)
-				generate_keyboard(container, current_layout, 'default');
+				generate_keyboard(container, current_layout, 'default', show_lang_dropbox);
 			else
-				generate_keyboard(container, current_layout, 'shift');
+				generate_keyboard(container, current_layout, 'shift', show_lang_dropbox);
 		}
 		else if ('{cplk}' == value) {
 			caps_lock = !caps_lock;
 			if ('shift' == current_sub_layout)
-				generate_keyboard(container, current_layout, 'default');
+				generate_keyboard(container, current_layout, 'default', show_lang_dropbox);
 			else
-				generate_keyboard(container, current_layout, 'shift');
+				generate_keyboard(container, current_layout, 'shift', show_lang_dropbox);
 		}
 		else if ('{alt}' == value && 'alt' in keyboards[current_layout]) {
 			if ('alt' == current_sub_layout)
-				generate_keyboard(container, current_layout, 'default');
+				generate_keyboard(container, current_layout, 'default', show_lang_dropbox);
 			else
-				generate_keyboard(container, current_layout, 'alt');
+				generate_keyboard(container, current_layout, 'alt', show_lang_dropbox);
 		}
 	}
 }
@@ -95,11 +95,11 @@ function key_pressed(value)
 function select_layout_change(selectBox)
 {
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    generate_keyboard(container, selectedValue, 'default');
+    generate_keyboard(container, selectedValue, 'default', show_lang_dropbox);
     rpcProxy.onLayoutChange(selectedValue);
 }
 
-var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
+var generate_keyboard = function(container, layout, sub_layout, dropbox)
 {
 	current_layout = layout;
 	current_sub_layout = sub_layout;
