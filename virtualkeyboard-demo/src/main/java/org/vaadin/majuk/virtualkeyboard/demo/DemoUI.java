@@ -1,10 +1,7 @@
 package org.vaadin.majuk.virtualkeyboard.demo;
 
-import java.awt.TextArea;
-
 import org.vaadin.majuk.virtualkeyboard.VirtualKeyboard;
 
-import com.google.gwt.place.shared.WithTokenizers;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
@@ -19,7 +16,6 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 
 @Theme("demo")
 @Title("VirtualKeyboard Add-on Demo")
@@ -33,14 +29,11 @@ public class DemoUI extends UI
         // Initialize our new UI component
         final Label passwordLabel = new Label(); 
         final TextField usernameTextField = new TextField();
-        final TextField textField1 = new TextField();
-        final TextField textField2 = new TextField();
         final PasswordField password = new PasswordField();
         final com.vaadin.ui.TextArea textArea = new com.vaadin.ui.TextArea();
         final com.vaadin.ui.TextArea textArea1 = new com.vaadin.ui.TextArea();
         final VirtualKeyboard virtualkeyboard1 = new VirtualKeyboard();
         final VirtualKeyboard virtualkeyboard2 = new VirtualKeyboard();
-        final VirtualKeyboard virtualkeyboard3 = new VirtualKeyboard();
         final VerticalLayout layout = new VerticalLayout();
         final VerticalLayout firstSectionLayout = new VerticalLayout();
         final VerticalLayout secondSectionLayout = new VerticalLayout();

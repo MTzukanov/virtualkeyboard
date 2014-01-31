@@ -1,7 +1,9 @@
 package org.vaadin.majuk.virtualkeyboard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.event.FieldEvents.FocusEvent;
@@ -10,20 +12,22 @@ import com.vaadin.shared.communication.ServerRpc;
 import com.vaadin.shared.ui.JavaScriptComponentState;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.PasswordField;
 
 // This is the server-side UI component that provides public API 
 // for VirtualKeyboard
+@SuppressWarnings("serial")
 @JavaScript({"virtualkeyboard.js", "keyboards.js"})
 public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	//private static int instanceCount = 0;
 	
-	private List<KeyListener> listenerList;
-	private List<AbstractTextField> components;
+	private List<KeyListener> listenerList = new ArrayList<KeyListener>();
+	private Map<AbstractTextField, FocusListener> focusListeners = new HashMap<>();	
+
 	private AbstractTextField focusedTextField;
+	
 	private Window keyboardWindow;
 	private boolean isFloatingWindow = false;
 	
@@ -51,9 +55,6 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	}	
 
 	public VirtualKeyboard(){
-		listenerList = new ArrayList<KeyListener>();
-		components = new ArrayList<AbstractTextField>();
-				
         registerRpc(new KeyClickRpc() {
             public void onKeyClick(String s) {
                 //Notification.show("Clicked on [" + s + "]");
@@ -94,7 +95,7 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	public static class State extends JavaScriptComponentState {
 		public String current_layout;
 		public boolean show_lang_dropbox = true;
-		//public int instanceId;
+		// public int instanceId;
 	}
 	
 	public void setLanguageDropboxVisible(boolean show)
@@ -130,9 +131,7 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 	}
 	
 	public void attachComponent(final AbstractTextField component) {
-		components.add(component);
-		
-		component.addFocusListener(new FocusListener() {
+		focusListeners.put(component, new FocusListener() {
 			@Override
 			public void focus(FocusEvent event) {
 				focusedTextField = (AbstractTextField) event.getComponent();
@@ -146,12 +145,16 @@ public class VirtualKeyboard extends com.vaadin.ui.AbstractJavaScriptComponent {
 				}
 			}
 		});
+		
+		component.addFocusListener(focusListeners.get(component));
 	}
 	
-	public void dettachComponent(AbstractTextField component) {
-		//component.removeFocusListener(listener)
-		components.remove(component);
-		//TODO add remove event listener
+	public void dettachComponent(final AbstractTextField component) {
+		if (focusListeners.containsKey(component))
+		{
+			component.removeFocusListener(focusListeners.get(component));
+			focusListeners.remove(component);
+		}
 	}
 
 	public Window getWindow() {

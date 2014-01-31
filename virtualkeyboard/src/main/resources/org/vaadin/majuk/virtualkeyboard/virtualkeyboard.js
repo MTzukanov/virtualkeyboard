@@ -99,7 +99,7 @@ function select_layout_change(selectBox)
     rpcProxy.onLayoutChange(selectedValue);
 }
 
-var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
+var generate_keyboard = function(container, layout, sub_layout, show_dropbox)
 {
 	current_layout = layout;
 	current_sub_layout = sub_layout;
@@ -120,7 +120,7 @@ var generate_keyboard = function(container, layout, sub_layout, dropbox = true)
 			container.innerHTML += ("<br>");
 	}
 	
-	if (dropbox)
+	if (typeof show_dropbox == 'undefined' || show_dropbox == true)
 	{
 		  var newselect = document.createElement('select');
 		  newselect.setAttribute('onchange', 'select_layout_change(this)');
